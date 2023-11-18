@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.views import generic
+from django.urls import reverse_lazy
+from .models import Post, Comment
+from .forms import PostForm
 
 # Create your views here.
 
@@ -12,7 +15,14 @@ class AboutPage(generic.TemplateView):
     template_name = 'about.html'
 
 
-class DetailPage(generic.TemplateView):
+class CreatePost(generic.edit.CreateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'post_form.html'
+    success_url = reverse_lazy('home') # Redirect to this url on successful form submission
+
+
+class DetailPost(generic.TemplateView):
     template_name = 'blog_detail.html'
 
 

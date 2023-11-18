@@ -1,3 +1,78 @@
 from django.db import models
+from django.utils import timezone
+from django.urls import reverse
+from django.utils.text import slugify
 
 # Create your models here.
+
+class Post(models.Model):
+    CATEGORY = [
+        ('business', 'BUSINESS'),
+        ('culture', 'CULTURE'),
+        ('celebrity', 'CELEBRITY'),
+        ('design', 'DESIGN'),
+        ('food', 'FOOD'),
+        ('lifestyle', 'LIFESTYLE'),
+        ('politics', 'POLITICS'),
+        ('sports', 'SPORTS'),
+        ('startups', 'STARTUPS'),
+        ('tech', 'TECH'),
+        ('travel', 'TRAVEL'),
+    ]
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    title = models.CharField(max_length=200)
+    text = models.TextField()
+    slug = models.SlugField(allow_unicode=True, unique=True, default='default')
+    category = models.CharField(max_length=20, choices=CATEGORY, default='default')
+    img = models.ImageField(default='default')
+    created = models.DateTimeField(auto_now=True)
+    published = models.DateTimeField(blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+    def publish(self):
+        self.published = timezone.now()
+        self.save()
+    
+    def approve_comment(self):
+        return self.comments.filter(approved_comment=True)
+    
+    def get_absolute_url(self):
+        return reverse('post_detail', kwargs={'pk': self.pk})
+    
+    def __str__(self):
+        return self.title
+
+
+class Comment(models.Model):
+    post = models.ForeignKey('blog.post', on_delete=models.CASCADE, related_name='comments')
+    author = models.CharField(max_length=50)
+    text = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    approved_comment = models.BooleanField(default=False)
+
+    def approve_comment(self):
+        self.approved_comment = True
+        self.save()
+
+    def __str__(self):
+        return self.text
+
+
+class Team(models.Model):
+    TEAM_CHOICES = [
+        ('ceo', 'FOUNDER & CEO'),
+        ('vp', 'FOUNDER, VP'),
+        ('editor', 'EDITOR STAFF'),
+    ]
+
+    first_name = models.CharField(max_length=25)
+    last_name = models.CharField(max_length=25)
+    category = models.CharField(max_length=20, choices=TEAM_CHOICES)
+    description = models.TextField()
+    pics = models.ImageField(default='default')
+
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'

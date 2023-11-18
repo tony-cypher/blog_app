@@ -57,15 +57,15 @@
             <nav id="navbar" class="navbar">
                 <ul>
                     <li><a href="{% url 'home' %}">Blog</a></li>
-                    <li><a href="{% url 'detail' %}">Single Post</a></li>
+                    <li><a href="{% url 'detail' %">Single Post</a></li>
                     <li class="dropdown"><a href="#"><span>Categories</span> <i class="fas fa-angle-down"></i></a>
                         <ul>
                             <li><a href="#">Search Result</a></li>
-                            <li><a href="#">Drop Down 1</a></li>
+                            <li><a href="{% url 'new_post' %}">Create Post</a></li>
                             <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i
                                         class="fas fa-angle-down"></i></a>
                                 <ul>
-                                    <li><a href="#">Deep Drop Down 1</a></li>
+                                    <li><a href="#">Deep Drop Down</a></li>
                                     <li><a href="#">Deep Drop Down 2</a></li>
                                     <li><a href="#">Deep Drop Down 3</a></li>
                                     <li><a href="#">Deep Drop Down 4</a></li>
