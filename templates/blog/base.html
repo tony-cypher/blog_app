@@ -57,7 +57,7 @@
             <nav id="navbar" class="navbar">
                 <ul>
                     <li><a href="{% url 'home' %}">Blog</a></li>
-                    <li><a href="{% url 'detail' %">Single Post</a></li>
+                    <li><a href="{% url 'detail' %}">Single Post</a></li>
                     <li class="dropdown"><a href="#"><span>Categories</span> <i class="fas fa-angle-down"></i></a>
                         <ul>
                             <li><a href="#">Search Result</a></li>
@@ -95,7 +95,7 @@
                 <div class="search-form-wrap js-search-form-wrap">
                     <form action="#" class="search-form">
                         <span class="icon bi-search"></span>
-                        <input type="text" placeholder="Search" class="form-control">
+                        <input type="text" placeholder="Search" class="form-control" name="search">
                         <button class="btn js-search-close"><span class="bi-x"></span></button>
                     </form>
                 </div><!-- End Search Form -->

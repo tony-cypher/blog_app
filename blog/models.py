@@ -22,14 +22,16 @@ class Post(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     text = models.TextField()
-    slug = models.SlugField(allow_unicode=True, unique=True, default='default')
-    category = models.CharField(max_length=20, choices=CATEGORY, default='default')
-    img = models.ImageField(default='default')
-    created = models.DateTimeField(auto_now=True)
+    slug = models.SlugField(allow_unicode=True, unique=True)
+    category = models.CharField(max_length=20, choices=CATEGORY)
+    img = models.ImageField(upload_to='images/', null=True)
+    created = models.DateTimeField(default=timezone.now)
     published = models.DateTimeField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
+        print(self.title)
+        print(self.img)
         super().save(*args, **kwargs)
 
     def publish(self):
@@ -72,7 +74,7 @@ class Team(models.Model):
     last_name = models.CharField(max_length=25)
     category = models.CharField(max_length=20, choices=TEAM_CHOICES)
     description = models.TextField()
-    pics = models.ImageField(default='default')
+    pics = models.ImageField(upload_to='team/')
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
