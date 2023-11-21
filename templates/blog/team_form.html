@@ -12,29 +12,30 @@
                         <div class="row justify-content-center mt-5">
 
                             <div class="col-lg-12">
-                                <h5 class="comment-title">Create a Post</h5>
+                                <h5 class="comment-title">Add User</h5>
                                 <div class="row">
-                                    <div class="col-lg-6 mb-3">
-                                        {{ form.author }}
+                                    <div class="col-lg-12 mb-3">
+                                        <label for="id_first_name">First Name</label>
+                                        {{ form.first_name }}
+                                    </div>
+                                    <div class="col-lg-12 mb-3">
+                                        <label for="id_last_name">Last Name</label>
+                                        {{ form.last_name }}
                                     </div>
                                     <div class="col-lg-6 mb-3">
                                         {{ form.category }}
                                     </div>
-                                    <div class="col-lg-12 mb-3">
-                                        <label for="id_title">Post</label>
-                                        {{ form.title }}
-                                    </div>
                                     <div class="col-12 mb-3">
-                                        <label for="id_text">Message</label>
-                                        {{ form.text}}
+                                        <label for="id_description">Profile</label>
+                                        {{ form.description}}
                                     </div>
                                     <div class="col-lg-6 mb-3">
-                                        <label for="formFile">Post Image</label>
-                                        {{ form.img}}
+                                        <label for="formFile"></label>Image</label>
+                                        {{ form.pics}}
                                     </div>
 
                                     <div class="col-12">
-                                        <button type="submit" class="btn btn-primary">Create Post</button>
+                                        <button type="submit" class="btn btn-primary">Create User</button>
                                     </div>
                                 </div>
                             </div>
@@ -46,6 +47,5 @@
     </section>
 
 </main>
-<script>var editor = new MediumEditor('.editable');</script>
 
 {% endblock %}

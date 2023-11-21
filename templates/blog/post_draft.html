@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main id="main">
+    <div class="container" data-aos="fade-up">
+        <div class="row">
+            <div class="col-lg-12 text-center mb-5">
+                <h1 class="page-title">Drafts</h1>
+            </div>
+        </div>
+        {% for post in posts %}
+        <div class="row mb-5">
+            <p class="date">Created: {{ post.created }}</p>
+            <h1><a href="{% url 'detail' slug=post.slug %}">{{ post.title }}</a></h1>
+            <p>{{ post.text|safe|truncatechars:200 }}</p>
+            <hr>
+        </div>
+        {% endfor %}
+    </div>
+    </section>
+</main>
+
+{% endblock %}
