@@ -47,10 +47,13 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+# -------------------------COMMENTS---------------------------------#
+
 
 class Comment(models.Model):
-    post = models.ForeignKey('blog.post', on_delete=models.CASCADE, related_name='comments')
-    author = models.CharField(max_length=50)
+    post = models.ForeignKey('blog.post', on_delete=models.CASCADE, related_name='comments', null=True, blank=True)
+    name = models.CharField(max_length=50)
+    email = models.EmailField()
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
     approved_comment = models.BooleanField(default=False)
@@ -62,7 +65,7 @@ class Comment(models.Model):
     def __str__(self):
         return self.text
 
-
+# -------------------------------TEAM-----------------------------------#
 class Team(models.Model):
     TEAM_CHOICES = [
         ('ceo', 'FOUNDER & CEO'),

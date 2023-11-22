@@ -17,7 +17,12 @@ class PostForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ('author', 'text')
+        fields = ('name', 'email', 'text')
+        widgets = {
+            'name': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Enter your name'}),
+            'email': forms.EmailInput(attrs={'class':'form-control', 'placeholder':'Enter your email'}),
+            'text': forms.Textarea(attrs={'class':'form-control', 'placeholder':'Comment'})
+        }
 
 
 class TeamForm(forms.ModelForm):

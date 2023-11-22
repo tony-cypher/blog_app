@@ -10,4 +10,8 @@ urlpatterns = [
     path('post/<slug:slug>', views.DetailPost.as_view(), name='detail'),
     path('contact/', views.ContactPage.as_view(), name='contact'),
     path('post/publish/<int:pk>/', views.publish_post, name='publish'),
+    path('post/<slug:slug>/comment', views.post_comment, name='add_comment'),
+    path('post/<slug:slug>/comment/<int:pk>/approve/', views.comment_approve, name='approve'),
+    path('post/<slug:slug>/comment/<int:pk>/delete/', views.comment_delete, name='delete'),
+
 ]
